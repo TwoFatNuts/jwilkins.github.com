@@ -1,0 +1,208 @@
+<!doctype html>  
+<html lang="en">
+<head>
+<meta charset="utf-8">
+
+<title>zoom.js</title>
+
+<meta name="description" content="Bitcoin charts in a grid, zooming on mouse over">
+<meta name="author" content="Jonathan Wilkins jwilkins at bitand net / @jwilkins">
+<link rel="stylesheet" href="reset.css">
+<style type="text/css">
+@viewport{
+  zoom: 1.0;
+  width: extend-to-zoom;
+}
+body {margin:0; padding:0;}
+.Table {
+  display: table; 
+  width: 200%; 
+  height: 200%;
+  zoom: 0.5;
+  -moz-transform: scale(0.5);
+  -moz-transform-origin: 0 0;
+  -o-transform: scale(0.5);
+  -o-transform-origin: 0 0;
+  -webkit-transform: scale(0.5);
+  -webkit-transform-origin: 0 0;
+}
+
+.Row {display: table-row; width: 100%; height: 50%;}
+
+.Cell {
+  display: table-cell; 
+  overflow: hidden; 
+  z-index: 0;
+  height: 1200px;
+  width: 1600px;
+  border: 20px;
+  background-color: #000000;
+}
+.bitcoinwisdom_f {height:100%; width:120%; z-index: 0;}
+
+.Cell iframe {height:100%; width:100%; z-index: 0;}
+
+</style>	
+</head>
+
+<body>
+<div class="Table">
+  <div class="Row">
+    <div id="wisdomstmp1" class="Cell">
+      <iframe class='bitcoinwisdom_f' 
+        src="http://bitcoinwisdom.com/markets/bitstamp/btcusd" seamless></iframe></div>
+    <div id="wisdomstmp2" class="Cell">
+      <iframe class='bitcoinwisdom_f' 
+        src="http://bitcoinwisdom.com/markets/bitfinex/ltcusd" seamless></iframe></div>
+    <div id="wisdombfx" class="Cell">
+      <iframe class='bitcoinwisdom_f' 
+        src="http://bitcoinwisdom.com/markets/bitfinex/btcusd" seamless></iframe></div>
+  </div>
+  <div class="Row">
+    <div id="coinsight" class="Cell">
+      <iframe src="http://coinsight.org/bitfinex.html"
+        seamless></iframe>
+    </div>
+    <div id="bitcoinity" class="Cell">
+      <iframe src="http://bitcoinity.org/markets/bitstamp/USD"
+        seamless></iframe>
+    </div>
+    <div id='bitcoincharts' class="Cell">
+      <iframe src="http://bitcoincharts.com/markets/"
+        seamless/></iframe>
+    </div>
+  </div>
+  <div class="Row">
+    <div id="pulse" class="Cell">
+      <!-- bitcointalk sets x-frame deny >
+      <iframe src="https://bitcointalk.org/index.php?topic=178336.0" -->
+      <!-- no reddit, x-frame-options set to SAMEORIGIN
+      <iframe src="http://www.reddit.com/r/bitcoinmarkets/new" -->
+      <iframe src="http://www.bitcoinpulse.com/"
+        seamless></iframe>
+    </div>
+    <div id="goog" class="Cell">
+      <iframe src="http://www.google.com/trends/explore#q=bitcoin&cmpt=q"
+        seamless></iframe>
+    </div>
+    <div id="bigterm" class="Cell">
+      <iframe src="https://www.bigterminal.com/chart/currency/bitstampBTCUSD/"
+        seamless></iframe>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src=" http://cdn.craig.is/js/mousetrap/mousetrap.min.js?9d308"></script>
+<script src="zoom.js"></script>
+<script>
+document.querySelector( '#main' ).addEventListener( 'click', function( event ) {
+    event.preventDefault();
+    zoom.to({ element: event.target });
+    } );
+</script>
+<script>
+
+var one = function(){
+  zoom.to({ x: 0, y: 0, scale: 3})
+};
+
+var two = function(){
+  zoom.to({ x: 555, y: 0, scale: 3})
+};
+
+var three = function(){
+  zoom.to({ x: 1110, y: 0, scale: 3})
+};
+
+var four = function(){
+  zoom.to({ x: 0, y: 290, scale: 3})
+};
+
+var five = function(){
+  zoom.to({ x: 555, y: 290, scale: 3})
+};
+
+var six = function(){
+  zoom.to({ x: 1110, y: 290, scale: 3})
+};
+
+var seven = function(){
+  zoom.to({ x: 0, y: 590, scale: 3})
+};
+
+var eight = function(){
+  zoom.to({ x: 555, y: 590, scale: 3})
+};
+
+var nine = function(){
+  zoom.to({ x: 1110, y: 590, scale: 3})
+};
+
+Mousetrap.bind('esc', function() { zoom.out(); });
+Mousetrap.bind('1', function() { one(); });
+Mousetrap.bind('2', function() { two(); });
+Mousetrap.bind('3', function() { three(); });
+Mousetrap.bind('4', function() { four(); });
+Mousetrap.bind('5', function() { five(); });
+Mousetrap.bind('6', function() { six(); });
+Mousetrap.bind('7', function() { seven(); });
+Mousetrap.bind('8', function() { eight(); });
+Mousetrap.bind('9', function() { nine(); });
+
+$("div#wisdomstmp1").hover(function(){
+    one();
+},function(){
+  zoom.out();
+});
+
+$("div#wisdomstmp2").hover(function(){
+    two();
+},function(){
+  zoom.out();
+});
+
+$("div#wisdombfx").hover(function(){
+    three();
+},function(){
+  zoom.out();
+});
+
+$("div#coinsight").hover(function(){
+    four();
+},function(){
+  zoom.out();
+});
+
+$("div#bitcoinity").hover(function(){
+    five();
+},function(){
+  zoom.out();
+});
+
+$("div#bitcoincharts").hover(function(){
+    six();
+},function(){
+  zoom.out();
+});
+
+$("div#pulse").hover(function(){
+    seven();
+},function(){
+  zoom.out();
+});
+
+$("div#goog").hover(function(){
+    eight();
+},function(){
+  zoom.out();
+});
+
+$("div#bigterm").hover(function(){
+    nine();
+},function(){
+  zoom.out();
+});
+</script>
+</body>
+</html>
